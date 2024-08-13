@@ -1,6 +1,7 @@
 package boardgame;
 
 public class Position {
+
     private Integer row;
     private Integer column;
 
@@ -30,9 +31,8 @@ public class Position {
         return row + ", " + column;
     }
 
-
-    public void setValues(Integer row, Integer column){
+    /* public void setValues(Integer row, Integer column){
         this.row = row;
         this.column = column;
-    }
+    } */
 }
