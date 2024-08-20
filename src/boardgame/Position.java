@@ -30,9 +30,4 @@ public class Position {
     public String toString(){
         return row + ", " + column;
     }
-
-    /* public void setValues(Integer row, Integer column){
-        this.row = row;
-        this.column = column;
-    } */
 }
