@@ -33,6 +33,13 @@ public class UI {
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+    // https://stackoverflow.com/questions/2979383/java-clear-the-console
+    public static void clearScreen() {
+        /* Limpa a tela a cada movimentação de peça */
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public static ChessPosition readChessPosition(Scanner sc){
         try{
             /* Ler a posição digitada pelo usuário, separando a primeira posição da segunda
@@ -55,7 +62,7 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.println(" a b c d e f g h");
+        System.out.println("  a b c d e f g h");
     }
 
     private static void printPiece(ChessPiece piece) {
