@@ -16,13 +16,13 @@ public class ChessMatch {
     }
 
     public ChessPiece[][] getPieces(){
-        ChessPiece[][] auxMatch = new ChessPiece[board.getRows()][board.getColumns()];
+        ChessPiece[][] auxMatriz = new ChessPiece[board.getRows()][board.getColumns()];
         for (int icont = 0; icont < board.getRows(); icont++){
             for (int jcont = 0; jcont < board.getColumns(); jcont++){
-                auxMatch[icont][jcont] = (ChessPiece) board.piece(icont, jcont);
+                auxMatriz[icont][jcont] = (ChessPiece) board.piece(icont, jcont);
             }
         }
-        return auxMatch;
+        return auxMatriz;
     }
 
     public ChessPiece perfomChessPiece(ChessPosition sourcePosition, ChessPosition targetPosition){
@@ -31,6 +31,8 @@ public class ChessMatch {
         Position target = targetPosition.toPosition();
         /* retorna o método que verifica se há peças na posição de origem */
         validateSourcePosition(source);
+        /* Valida a posição de destino */
+        validateTargetPosition(source, target);
         /* Movimenta a peça */
         Piece capturedPiece = makeMove(source, target);
         /* DownCast */
@@ -41,6 +43,14 @@ public class ChessMatch {
         if(!board.thereIsAPiece(position)){
             /* Verifica se há peças na posição de origem */
             throw new ChessException("There is no piece on source position");
+        } else if (!board.piece(position).isThereAnyPossibleMove()){
+            throw new ChessException("There is no possible moves for the chosen piece");
+        }
+    }
+
+    private void validateTargetPosition(Position source, Position target){
+        if (!board.piece(source).possibleMoves(target)){
+            throw new ChessException("The chosen piece can't move to target position");
         }
     }
 
