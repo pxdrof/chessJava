@@ -25,7 +25,15 @@ public class ChessMatch {
         return auxMatriz;
     }
 
-    public ChessPiece perfomChessPiece(ChessPosition sourcePosition, ChessPosition targetPosition){
+    public boolean[][] possibleMoves(ChessPosition sourcePosition){
+        Position position = sourcePosition.toPosition();
+        /* Valida a posição de origem */
+        validateSourcePosition(position);
+        /* Retorna as posições possíveis para jogada */
+        return board.piece(position).possibleMoves();
+    }
+
+    public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition){
         /* Localiza a posição de origem e posição que deixar mover a peça */
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();

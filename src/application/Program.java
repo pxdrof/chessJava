@@ -1,6 +1,5 @@
 package application;
 
-import boardgame.Board;
 import chess.ChessException;
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -23,11 +22,15 @@ public class Program {
                 System.out.print("Source: ");
                 ChessPosition source = UI.readChessPosition(sc);
 
+                boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+                UI.clearScreen();
+                UI.printBoard(chessMatch.getPieces(), possibleMoves);
+
                 System.out.println();
                 System.out.print("Target: ");
                 ChessPosition target = UI.readChessPosition(sc);
 
-                ChessPiece capturedPiece = chessMatch.perfomChessPiece(source, target);
+                ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
             } catch (ChessException | InputMismatchException e){
                 System.out.print(e.getMessage());
                 sc.nextLine();

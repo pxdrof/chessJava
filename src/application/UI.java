@@ -15,8 +15,9 @@ public class UI {
     // https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
     /* Cores usadas no tabuleiro */
     public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
 
 
     // https://stackoverflow.com/questions/2979383/java-clear-the-console
@@ -40,27 +41,43 @@ public class UI {
         }
     }
 
+    /* Impressão da matriz original só com as peças */
     public static void printBoard(ChessPiece[][] pieces){
         for (int icont = 0; icont < pieces.length; icont++){
             System.out.print((8 - icont) + " ");
             for (int jcont = 0; jcont < pieces.length; jcont++){
-                printPiece(pieces[icont][jcont]);
+                printPiece(pieces[icont][jcont], false);
             }
             System.out.println();
         }
         System.out.println("  a b c d e f g h");
     }
 
-    private static void printPiece(ChessPiece piece) {
+    /* Impressão da matriz original só com as peças e os movimentos possíveis */
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves){
+        for (int icont = 0; icont < pieces.length; icont++){
+            System.out.print((8 - icont) + " ");
+            for (int jcont = 0; jcont < pieces.length; jcont++){
+                printPiece(pieces[icont][jcont], possibleMoves[icont][jcont]);
+            }
+            System.out.println();
+        }
+        System.out.println("  a b c d e f g h");
+    }
+
+    private static void printPiece(ChessPiece piece, boolean background) {
+        if (background){
+            System.out.print(ANSI_BLUE_BACKGROUND);
+        }
         if (piece == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         }
         else {
             if (piece.getColor() == Color.White) {
-                System.out.print(ANSI_WHITE + piece + ANSI_RESET);
+                System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
             }
             else {
-                System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
+                System.out.print(ANSI_GREEN + piece + ANSI_RESET);
             }
         }
         System.out.print(" ");
