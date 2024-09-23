@@ -41,6 +41,14 @@ public class UI {
         }
     }
 
+    /* Imprime a paritda e não só o tabuleiro */
+    public static void printMach(ChessMatch chessMatch){
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn: " + chessMatch.getTurn());
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+    }
+
     /* Impressão da matriz original só com as peças */
     public static void printBoard(ChessPiece[][] pieces){
         for (int icont = 0; icont < pieces.length; icont++){
@@ -73,7 +81,7 @@ public class UI {
             System.out.print("-" + ANSI_RESET);
         }
         else {
-            if (piece.getColor() == Color.White) {
+            if (piece.getColor() == Color.Yellow) {
                 System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
             }
             else {
